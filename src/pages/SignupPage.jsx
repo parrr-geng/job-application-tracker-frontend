@@ -1,7 +1,6 @@
-import "./SignupPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import authService from "../../services/auth.service";
+import authService from "../services/auth.service";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -53,6 +52,8 @@ function SignupPage() {
         <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleEmail} />
 
+        <br />
+
         <label>Password:</label>
         <input
           type="password"
@@ -61,9 +62,13 @@ function SignupPage() {
           onChange={handlePassword}
         />
 
+        <br />
+
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={handleName} />
 
+        <br />
+        
         <button type="submit">Sign Up</button>
       </form>
 
