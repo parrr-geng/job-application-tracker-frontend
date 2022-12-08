@@ -11,7 +11,9 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/User/ProfilePage";
 import EditProfilePage from "./pages/User/EditProfilePage";
-
+import CreateNewJobPage from "./pages/Job/CreateNewJobPage";
+import AllMyJobsPage from "./pages/Job/AllMyJobsPage";
+import JobDetailsPage from "./pages/Job/JobDetailsPage";
 
 function App() {
   return (
@@ -24,6 +26,10 @@ function App() {
         <Route path="/dashboard" element={<IsPrivate> <DashboardPage /> </IsPrivate>} />
         <Route path="/profile/:userId" element={<IsPrivate> <ProfilePage /> </IsPrivate>} />
         <Route path="/profile/:userId/edit" element={<IsPrivate> <EditProfilePage /> </IsPrivate>} />
+
+        <Route path="/:userId/jobs" element={<IsPrivate> <AllMyJobsPage /> </IsPrivate>} />
+        <Route path="/:userId/job/create" element={<IsPrivate> <CreateNewJobPage /> </IsPrivate>} />
+        <Route path="/jobs/:jobId" element={<JobDetailsPage />} />
 
       </Routes>
     </div>

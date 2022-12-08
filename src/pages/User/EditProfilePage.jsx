@@ -1,7 +1,9 @@
 import axios from "axios";
-import {useState, useEffect, useContext } from "react";
-import {useNavigate} from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
+
+import Navbar from "../../components/Navbar";
 
 function EditProfilePage () {
     const [oneUser, setOneUser] = useState({});
@@ -24,14 +26,29 @@ function EditProfilePage () {
     useEffect(() => {
         axios
           .get(`${baseURL}/api/profile/${userId}`)
-          .then((response) => setOneUser(response.data))
+          .then((response) => {
+            const oneUser = response.data;
+            setOneUser(oneUser);
+
+            setName(oneUser.name);
+            setLocation(oneUser.location);
+            setAbout(oneUser.about);
+            setWebsite(oneUser.website);
+            setExperience(oneUser.experience);
+            setEducation(oneUser.education);
+            setCertifications(oneUser.certifications);
+            setLanguages(oneUser.languages);
+            setSkills(oneUser.skills);
+            })
           .catch(err => console.log(err));  
       }, [userId]);
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const requestBody = {name, location, about, website, experience, education, certifications, languages, skills};
-        
+        console.log(languages);
+
         axios
           .put(`${baseURL}/api/profile/${userId}`, requestBody)
           .then(response => {
@@ -43,6 +60,7 @@ function EditProfilePage () {
     
     return(
         <>  
+            <Navbar />
             <h2>Edit Your Profile</h2>
             <form onSubmit = { handleSubmit }>
 
@@ -50,7 +68,9 @@ function EditProfilePage () {
                 <input type="text" name="name" onChange={e => setName(e.target.value)} placeholder={oneUser.name}/>
 
                 <label>Location</label>
-                <select id="country" name="location" onChange={e => setLocation(e.target.value)}>
+                <select id="country" name="location" 
+                onChange={e => setLocation(e.target.value)}
+                >
                     <option>select country</option>
                     <option value="AF">Afghanistan</option>
                     <option value="AX">Aland Islands</option>
@@ -322,7 +342,7 @@ function EditProfilePage () {
                 <textarea name="certifications" cols="30" rows="4" onChange={e => setCertifications(e.target.value)} placeholder={oneUser.certifications}></textarea>
 
                 <label>Languages</label>
-                <select name="languages" multiple onChange={e => setLanguages(e.target.value)} >
+                <select name="languages" multiple onChange={e => setLanguages(Array.from(e.target.selectedOptions, item => item.value))} >
                     <option>select languages</option>
                     <option value="Chinese">Chinese</option>
                     <option value="English">English</option>

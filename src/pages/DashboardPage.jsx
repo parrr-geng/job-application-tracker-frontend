@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; 
 
 import Navbar from "../components/Navbar";
+import AllMyJobsPage from "../pages/Job/AllMyJobsPage";
 
 function DashboardPage(){
 
@@ -18,6 +19,12 @@ function DashboardPage(){
                 <button>Profile</button>
             </Link>
 
+
+            <Link to={`/${userId}/job/create`}>
+                Collect A New Job
+            </Link>
+
+            <AllMyJobsPage />
         </>
     )
 }

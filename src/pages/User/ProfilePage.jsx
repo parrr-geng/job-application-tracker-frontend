@@ -3,6 +3,8 @@ import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/auth.context"; 
 import { Link } from "react-router-dom";
 
+import Navbar from "../../components/Navbar";
+
 function ProfilePage() {
   const [ oneUser, setOneUser ] = useState({});
   const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
@@ -17,8 +19,11 @@ function ProfilePage() {
 
   return (
     <div>
+      <Navbar />
       <h1>Profile page</h1>
       <h3>Name: <span>{oneUser.name}</span></h3>
+      <h4>Location</h4>
+      <p>{oneUser.location}</p>
       <h4>About</h4>
       <p>{oneUser.about}</p>
       <h4>Experience</h4>
