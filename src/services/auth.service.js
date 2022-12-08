@@ -11,10 +11,7 @@ class AuthService {
       // Retrieve the JWT token from the local storage
       const storedToken = localStorage.getItem("authToken");
 
-      if (storedToken) {
-        config.headers = { Authorization: `Bearer ${storedToken}` };
-      }
-
+      if (storedToken) { config.headers = { Authorization: `Bearer ${storedToken}` } }
       return config;
     });
   }
