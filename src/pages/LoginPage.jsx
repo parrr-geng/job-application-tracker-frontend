@@ -1,3 +1,5 @@
+import "./LoginPage.css";
+import { Button } from "react-bootstrap";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
@@ -33,25 +35,26 @@ function LoginPage() {
   };
 
   return (
-    <div className="LoginPage">
-      <h1>Log in</h1>
+    <div className="LoginPage shadow">
+      <div className="header">
+          <h2 className="fw-bold">Log in</h2>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-        <br />
+          <form onSubmit={handleLoginSubmit} className="form">
+            <label><small>Email</small></label>
+            <input type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
-        <br />
+            <label><small>Password</small></label>
+            <input type="password" name="password" value={password} onChange={handlePassword} />
+            <br />
 
-        <button type="submit">Login</button>
-      </form>
-      
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <Button variant="warning" type="submit">Login</Button>
+          </form>
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up </Link>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+          <small className="text-secondary mt-4">Don't have an account yet?</small>
+          <Link to={"/signup"}> Sign Up </Link>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,19 @@
+.LoginPage {
+    margin: 3vh 8vh;
+    border: solid 1px black;
+}
+
+.LoginPage .header {
+    text-align: left;
+    height: 89vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginPage .form {
+    display: flex;
+    flex-direction: column;
+    width: 30vh;
+}

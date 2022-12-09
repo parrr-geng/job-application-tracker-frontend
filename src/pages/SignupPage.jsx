@@ -1,6 +1,8 @@
+import "./SignupPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
+import { Button } from "react-bootstrap";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -31,29 +33,31 @@ function SignupPage() {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className="SignupPage shadow">
+      <div className="header">
+        <h2 className="fw-bold">Sign Up</h2>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-        <br />
+        <form onSubmit={handleSignupSubmit} className="form">
 
-        <label>Password:</label>
-        <input type="password" name="password" value={password} onChange={handlePassword} />
-        <br />
+          <label><small>Name</small></label>
+          <input type="text" name="name" value={name} onChange={handleName} />
+         
+          <label><small>Email</small></label>
+          <input type="email" name="email" value={email} onChange={handleEmail} />
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-        <br />
-        
-        <button type="submit">Sign Up</button>
-      </form>
+          <label><small>Password</small></label>
+          <input type="password" name="password" value={password} onChange={handlePassword} />
+          <br />
+    
+          <Button variant="warning" type="submit">Continue</Button>
+        </form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to={"/login"}>Login</Link>
+        <small className="text-secondary mt-4">Already have account?</small>
+        <Link to={"/login"}>Login</Link>
+      </div>
+
     </div>
   );
 }

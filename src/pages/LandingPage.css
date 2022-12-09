@@ -1,0 +1,25 @@
+.LandingPage {
+    margin: 3vh 8vh;
+    border: solid 1px black;
+}
+
+.header {
+    text-align: left;
+    padding: 4vh;
+    height: 65vh;
+    align-items: center;
+}
+
+.grid-container {
+    display: grid;
+    border-top: solid 1px black;
+    grid-template-columns: auto auto auto auto;
+}
+
+.grid-item {
+    border-right: solid 1px black;
+}
+
+.Link:hover {
+    background-color: RGB(255, 193, 7);
+}
