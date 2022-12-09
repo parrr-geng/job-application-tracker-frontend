@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 import Navbar from "../../components/Navbar";
 
@@ -9,16 +10,26 @@ function JobDetailsPage(){
     const jobId = useParams();
 
     const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+    const navigate = useNavigate();
 
     useEffect(()=>{
         axios
         .get(`${baseURL}/api/jobs/${jobId}`)
         .then(response => {
             setOneJob(response.data);
-            console.log(response.data);
+            //console.log(response.data);
         })
         .catch(error => console.log(error))
     }, [jobId])
+
+    const deleteJob = (jobId) => {                 
+        axios
+          .delete(`${baseURL}/api/jobs/${jobId}/delete`)
+          .then(() => {
+            navigate("/dashboard");
+          })
+          .catch((err) => console.log(err));  
+    }; 
 
     return(
         <div>
@@ -31,6 +42,8 @@ function JobDetailsPage(){
             <h4>{oneJob.recruiter}</h4>
             <p>{oneJob.description}</p>
 
+            <Link to="/jobs/:jobId/edit">Edit</Link>
+            <Button onClick={()=>{deleteJob(oneJob._id)}}>delete</Button>
         </div>
     )
 }

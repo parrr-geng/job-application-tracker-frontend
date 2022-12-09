@@ -47,7 +47,7 @@ function EditProfilePage () {
     const handleSubmit = (e) => {
         e.preventDefault();
         const requestBody = {name, location, about, website, experience, education, certifications, languages, skills};
-        console.log(languages);
+        //console.log(languages);
 
         axios
           .put(`${baseURL}/api/profile/${userId}`, requestBody)

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context"; 
+import { Button } from "react-bootstrap";
 
 function AllMyJobsPage(){
     const [jobs, setJobs] = useState([]); 
@@ -9,13 +10,27 @@ function AllMyJobsPage(){
     const userId = user._id;
 
     const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+    const navigate = useNavigate();
 
     useEffect(()=>{
+        retrieveAllJobs();
+    }, [userId])
+
+    const retrieveAllJobs = () => {
         axios.get(`${baseURL}/api/${userId}/jobs`)
         .then(response=>setJobs(response.data))
         .catch(error=>console.log(error))
-    }, [userId])
+    }
     
+    const deleteJob = (jobId) => {                 
+        axios
+          .delete(`${baseURL}/api/jobs/${jobId}/delete`)
+          .then(() => {
+            retrieveAllJobs();
+          })
+          .catch((err) => console.log(err));  
+    };  
+     
     return(
         <>
             {
@@ -25,6 +40,9 @@ function AllMyJobsPage(){
                             <h3>{job.title}</h3>
                             <p>{job.company}</p>
                         </Link>          
+                        <Button onClick={() => {deleteJob(job._id)}}>
+                            remove this one
+                        </Button>
                     </div>
                 ))
             }
