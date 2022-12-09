@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function LandingPage(){
+
+    const toggleDisplay = (divID) => {
+        let x = document.getElementById(divID);
+        x.style.display === "block" ? x.style.display = "none" : x.style.display = "block";
+    }
+
+
     return (
         <div className="LandingPage shadow">
             
@@ -30,18 +37,39 @@ function LandingPage(){
                 </div>
             </section>
 
+            <section id="Aboutus">
+                <div className="p-4">
+                    <h3>About Us</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
+                </div>
+            </section>
+
+            <section id="Howitworks">
+                <div className="p-4">
+                    <h3>How It Works</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
+                </div>
+            </section>
+
+            <section id="Pricing">
+                <div className="p-4">
+                    <h3>Pricing</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
+                </div>
+            </section>
+
             <footer className="grid-container">
-                <div className="grid-item p-3 Link ">
+                <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Aboutus")}>
                     <Link className="text-decoration-none text-dark">About us</Link>
                 </div>
-                <div className="grid-item p-3 Link ">
+                <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Howitworks")}>
                     <Link className="text-decoration-none text-dark">How it works?</Link>
                 </div>
-                <div className="grid-item p-3 Link ">
+                <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Pricing")}>
                     <Link className="text-decoration-none text-dark">Pricing</Link>
                 </div>
                 <div className="p-3 Link ">
-                    <Link className="text-decoration-none text-dark">Try Free</Link>
+                    <Link className="text-decoration-none text-dark">Contact us</Link>
                 </div>
             </footer>
             

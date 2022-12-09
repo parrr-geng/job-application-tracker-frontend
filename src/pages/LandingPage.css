@@ -23,3 +23,14 @@
 .Link:hover {
     background-color: RGB(255, 193, 7);
 }
+
+#Aboutus,
+#Howitworks,
+#Pricing 
+{
+    display: none;
+    text-align: left;
+    padding: 4vh;
+    height: 65vh;
+    align-items: center;
+}

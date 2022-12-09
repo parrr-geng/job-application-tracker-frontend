@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProfilePage from "./pages/User/ProfilePage";
 import EditProfilePage from "./pages/User/EditProfilePage";
+
 import CreateNewJobPage from "./pages/Job/CreateNewJobPage";
 import AllMyJobsPage from "./pages/Job/AllMyJobsPage";
 import JobDetailsPage from "./pages/Job/JobDetailsPage";

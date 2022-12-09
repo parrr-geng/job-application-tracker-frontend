@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar";
 
 function JobDetailsPage(){
     const [ oneJob, setOneJob ] = useState({});
-    const jobId = useParams();
+    const {jobId} = useParams();
 
     const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function JobDetailsPage(){
         .get(`${baseURL}/api/jobs/${jobId}`)
         .then(response => {
             setOneJob(response.data);
-            //console.log(response.data);
+            console.log(response.data);
         })
         .catch(error => console.log(error))
     }, [jobId])
@@ -42,7 +42,7 @@ function JobDetailsPage(){
             <h4>{oneJob.recruiter}</h4>
             <p>{oneJob.description}</p>
 
-            <Link to="/jobs/:jobId/edit">Edit</Link>
+            <Link to={`/jobs/${oneJob._id}/edit`}>Edit</Link>
             <Button onClick={()=>{deleteJob(oneJob._id)}}>delete</Button>
         </div>
     )

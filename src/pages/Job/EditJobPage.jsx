@@ -1,8 +1,10 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Button } from "react-bootstrap";
 
 function EditJobPage(){
+    const [oneJob, setOneJob] = useState({});
     const [title, setTitle] = useState("");
     const [company, setCompany] = useState("");
     const [location, setLocation] = useState("");
@@ -19,18 +21,13 @@ function EditJobPage(){
           .get(`${baseURL}/api/jobs/${jobId}`)
           .then((response) => {
             const thisJob = response.data;
+            setOneJob(thisJob);
             console.log(thisJob);
-
-            setTitle(thisJob.title);
-            setCompany(thisJob.company);
-            setLocation(thisJob.location);
-            setJobType(thisJob.jobType);
-            setRecruiter(thisJob.recruiter);
-            setDescription(thisJob.description);
             })
           .catch(err => console.log(err));  
-      }, [jobId]);
-
+      }, []);
+    //console.log(oneJob);
+    
     const handleSubmit = e => {
         e.preventDefault();
         const reqBody = {title, company, location, jobType, recruiter, description};
@@ -48,20 +45,29 @@ function EditJobPage(){
             setDescription("")
         })
         .catch(err=>console.log(err))
-    }
+    };
+
+    const deleteJob = (jobId) => {                 
+        axios
+          .delete(`${baseURL}/api/jobs/${jobId}/delete`)
+          .then(() => {
+            navigate("/dashboard");
+          })
+          .catch((err) => console.log(err));  
+    };
 
     return(
         <div>
             <h2>Edit this Job</h2>
             <form onSubmit={handleSubmit}>
                 <label>Title</label>
-                <input type="text" name="title" placeholder={title} onChange={e=>setTitle(e.target.value)} required/>
+                <input type="text" name="title" placeholder={oneJob.title} onChange={e=>setTitle(e.target.value)} required/>
 
                 <label>Company</label>
-                <input type="text" name="company" placeholder={company} onChange={e=>setCompany(e.target.value)} required/>
+                <input type="text" name="company" placeholder={oneJob.company} onChange={e=>setCompany(e.target.value)} required/>
 
                 <label>Location</label>
-                <input type="text" name="location" placeholder={location} onChange={e=>setLocation(e.target.value)} required/>
+                <input type="text" name="location" placeholder={oneJob.location} onChange={e=>setLocation(e.target.value)} required/>
 
                 <label>Job Type</label>
                 <select name="jobType" onChange={e=>setJobType(e.target.value)} required>
@@ -73,12 +79,13 @@ function EditJobPage(){
                 </select>
 
                 <label>Recruiter</label>
-                <input type="text" name="recruiter" placeholder={recruiter} onChange={e=>setRecruiter(e.target.value)} required/>
+                <input type="text" name="recruiter" placeholder={oneJob.recruiter} onChange={e=>setRecruiter(e.target.value)} required/>
 
                 <label>Description</label>
-                <textarea name="description" cols="30" rows="5" placeholder={description} onChange={e=>setDescription(e.target.value)}></textarea>
+                <textarea name="description" cols="30" rows="5" placeholder={oneJob.description} onChange={e=>setDescription(e.target.value)}></textarea>
 
                 <button type="submit">Save</button>
+                <Button onClick={()=>{deleteJob(oneJob._id)}}>delete</Button>
             </form>
         </div>
     )
