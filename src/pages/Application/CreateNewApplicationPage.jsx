@@ -52,6 +52,7 @@ function CreateNewApplicationPage(){
 
                 <label>Status</label>
                 <select onChange={e => setApplicationStatus(e.target.value)}>
+                    <option>Choose a Status</option>
                     <option value="Wishlist">Wishlist</option>
                     <option value="Applied">Applied</option>
                     <option value="In Process">In Process</option>

@@ -19,6 +19,8 @@ import EditJobPage from "./pages/Job/EditJobPage";
 
 import CreateNewApplicationPage from "./pages/Application/CreateNewApplicationPage";
 import ApplicationsPage from "./pages/Application/ApplicationsPage";
+import ApplicationDetailsPage from "./pages/Application/ApplicationDetailsPage";
+import EditApplicationPage from "./pages/Application/EditApplicationPage";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
         <Route path="/jobs/:jobId/apply" element={<CreateNewApplicationPage />} />
 
         <Route path="/:userId/applications/:status" element={<ApplicationsPage />} />
+        <Route path="/applications/:applicationId" element={<ApplicationDetailsPage />} />
+        <Route path="/applications/:applicationId/edit" element={<EditApplicationPage />} />
 
       </Routes>
     </div>

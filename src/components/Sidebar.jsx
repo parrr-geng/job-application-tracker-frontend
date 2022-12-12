@@ -15,11 +15,6 @@ function Sidebar(){
             </div>
             <div>
                 <Link to={`/profile/${userId}`}>
-                    My Applications
-                </Link>
-            </div>
-            <div>
-                <Link to={`/profile/${userId}`}>
                     Calendar
                 </Link>
             </div>

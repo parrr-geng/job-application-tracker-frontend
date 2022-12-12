@@ -4,17 +4,20 @@ import { AuthContext } from "../context/auth.context";
 
 import AllMyJobsPage from "../pages/Job/AllMyJobsPage";
 import Sidebar from "../components/Sidebar";
-import axios from "axios";
 import ApplicationsPage from "./Application/ApplicationsPage";
+import SearchField from "../components/SearchField";
 
 
 function DashboardPage(){
     const { user } = useContext(AuthContext);
     const userId = user._id;
+    const [search, setSearch] = useState(null);
 
     const showWishlist = () =>{
 
     }
+
+
 
     return(
         <>
@@ -23,6 +26,7 @@ function DashboardPage(){
                     <Sidebar /> 
                 </div>
                 <div className="col-10">
+                    <SearchField setSearch = {setSearch} />
                     <div>
                         <button onClick={showWishlist}>WishList</button>
                         <button>Applied</button>
@@ -35,27 +39,27 @@ function DashboardPage(){
                             <Link to={`/${userId}/job/create`}>
                                 + Collect A New Job
                             </Link>
-                            <AllMyJobsPage />
+                            <AllMyJobsPage search={search}/>
                         </div>
                         <div className="col-2 bg-light">
                             <h5>Wishlist</h5>
-                            <ApplicationsPage status={"Wishlist"}/>
+                            <ApplicationsPage status={"Wishlist"} search={search}/>
                         </div>
                         <div className="col-2 bg-primary">
                             <h5>Applied</h5>
-                            <ApplicationsPage status={"Applied"}/>
+                            <ApplicationsPage status={"Applied"} search={search}/>
                         </div>
                         <div className="col-2 bg-danger">
                             <h5>In Process</h5>
-                            <ApplicationsPage status={"In Process"}/>
+                            <ApplicationsPage status={"In Process"} search={search}/>
                         </div>
                         <div className="col-2 bg-secondary">
                             <h5>Rejected</h5>
-                            <ApplicationsPage status={"Rejected"}/>
+                            <ApplicationsPage status={"Rejected"} search={search}/>
                         </div>
                         <div className="col-2 bg-success">
                             <h5>Offer!</h5>
-                            <ApplicationsPage status={"Offer"}/>
+                            <ApplicationsPage status={"Offer"} search={search}/>
                         </div>
 
                     </div>
