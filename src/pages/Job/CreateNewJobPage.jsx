@@ -38,16 +38,16 @@ function CreateNewJobPage(){
     return(
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Title</label>
+                <label>Title</label><br />
                 <input type="text" name="title" placeholder="title" onChange={e=>setTitle(e.target.value)} required/>
-
-                <label>Company</label>
+                <br />
+                <label>Company</label><br />
                 <input type="text" name="company" placeholder="company" onChange={e=>setCompany(e.target.value)} required/>
-
-                <label>Location</label>
+                <br />
+                <label>Location</label><br />
                 <input type="text" name="location" placeholder="location" onChange={e=>setLocation(e.target.value)} required/>
-
-                <label>Job Type</label>
+                <br />
+                <label>Job Type</label><br />
                 <select name="jobType" onChange={e=>setJobType(e.target.value)} required>
                     <option>Select a job type</option>
                     <option value="Full-time">Full-time</option>
@@ -55,13 +55,13 @@ function CreateNewJobPage(){
                     <option value="Contract">Contract</option>
                     <option value="Internship">Internship</option>
                 </select>
-
-                <label>Recruiter</label>
+                <br />
+                <label>Recruiter</label><br />
                 <input type="text" name="recruiter" placeholder="recruiter" onChange={e=>setRecruiter(e.target.value)} required/>
-
-                <label>Description</label>
+                <br />
+                <label>Description</label><br />
                 <textarea name="description" cols="30" rows="5" placeholder="description" onChange={e=>setDescription(e.target.value)}></textarea>
-
+                <br /><br />
                 <button type="submit">Add this Job</button>
             </form>
         </div>

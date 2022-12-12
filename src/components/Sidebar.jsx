@@ -1,13 +1,23 @@
-import { useContext} from "react";
+import { useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; 
+import Popup from "reactjs-popup";
+import ProfilePage from "../pages/User/ProfilePage";
 
 function Sidebar(){
-    const { user } = useContext(AuthContext);
+    const { user, logOutUser } = useContext(AuthContext);
     const userId = user._id;
+
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+
+    const contentStyle = { background: 'rgba(256,256,256,0.9)', overflow:"auto" };
+    const overlayStyle = { background: 'rgba(0,0,0,0.2)' };
+    const arrowStyle = { color: '#fff' };
+
     return(
-        <div>
-            <div>Hi {user.name}</div>
+        <div className="Sidebar">
+            <div className="my-4">Hi {user.name}</div>
             <div>
                 <Link to="/dashboard">
                     Dashboard
@@ -18,11 +28,20 @@ function Sidebar(){
                     Calendar
                 </Link>
             </div>
-            <div>
-                <Link to={`/profile/${userId}`}>
-                    My Profile
-                </Link>
-            </div>    
+            <div onClick={()=>setOpen(o => !o)}>
+                    My Profile 
+            </div>   
+            <button onClick={logOutUser}> Logout </button> 
+            <Popup 
+                open={open}
+                closeOnDocumentClick
+                onClose={closeModal}
+                {...{contentStyle, overlayStyle, arrowStyle}}
+            >
+                <ProfilePage className="overflow-auto"/>
+            </Popup>
+
+
         </div>
     )
 }

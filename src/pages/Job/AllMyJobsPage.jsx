@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Popup from "reactjs-popup";
 import { AuthContext } from "../../context/auth.context"; 
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import JobDetailsPage from "./JobDetailsPage";
 
 function AllMyJobsPage(){
     const [jobs, setJobs] = useState([]); 
@@ -22,30 +24,30 @@ function AllMyJobsPage(){
         .catch(error=>console.log(error))
     }
     
-    const deleteJob = (jobId) => {                 
-        axios
-          .delete(`${baseURL}/api/jobs/${jobId}/delete`)
-          .then(() => {
-            retrieveAllJobs();
-          })
-          .catch((err) => console.log(err));  
-    };  
+    const [open, setOpen] = useState(false);
+    const [popupJobId, setPopupJobId] = useState("");
+    const closeModal = () => setOpen(false);
      
     return(
         <>
             {
                 jobs.map(job =>(
-                    <div>
-                        <Link to={`/jobs/${job._id}`}>
-                            <h3>{job.title}</h3>
-                            <p>{job.company}</p>
-                        </Link>          
-                        <Button onClick={() => {deleteJob(job._id)}}>
-                            remove this one
-                        </Button>
-                    </div>
+                    <Card className="my-2">
+                        <Card.Body key={job._id} onClick={()=>{setOpen(o => !o); setPopupJobId(job._id)}}>
+                            <h6>{job.title}</h6>
+                            <p>{job.company}, {job.jobType}</p>
+                        </Card.Body>          
+                    </Card>
                 ))
             }
+            <Popup 
+                open={open}
+                closeOnDocumentClick
+                onClose={closeModal}
+            >
+                <JobDetailsPage jobId={popupJobId} />
+            </Popup>
+
         </>
     )
 }

@@ -34,6 +34,10 @@ function SignupPage() {
 
   return (
     <div className="SignupPage shadow">
+      <Link to="/" className="Logo">
+        <h3 className="ms-4 p-3 fw-bold">J..</h3>
+      </Link>
+
       <div className="header">
         <h2 className="fw-bold">Sign Up</h2>
 

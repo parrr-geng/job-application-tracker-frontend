@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
 import { AuthContext } from "../../context/auth.context"; 
 
 function CreateNewApplicationPage(){
@@ -47,6 +48,7 @@ function CreateNewApplicationPage(){
 
     return(
         <>  
+            <Sidebar />
             <form onSubmit = {handleSubmit}>
                 <h5>Application for {jobTitle}</h5>
 

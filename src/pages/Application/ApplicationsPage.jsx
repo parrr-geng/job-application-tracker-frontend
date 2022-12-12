@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import Popup from "reactjs-popup";
+import { Card } from "react-bootstrap";
 import { AuthContext } from "../../context/auth.context"; 
+import ApplicationDetailsPage from "./ApplicationDetailsPage";
 
 function ApplicationsPage(props){
     const status = props.status;
@@ -10,6 +13,10 @@ function ApplicationsPage(props){
     const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
     const { user } = useContext(AuthContext);
     const userId = user._id;
+
+    const [open, setOpen] = useState(false);
+    const [popupApplicationId, setPopupApplicationId] = useState("");
+    const closeModal = () => setOpen(false);
 
     useEffect(()=>{
         axios.get(`${baseURL}/api/${userId}/applications/${status}`)
@@ -28,18 +35,25 @@ function ApplicationsPage(props){
         .catch(error => console.log(error))
     }, [status])
 
+
     return (
         <>
             {applications.map(application => (
-                <Link to={`/applications/${application._id}`}>
-                    <div key={application._id}>
-                        <h5>Which Job?</h5>
-                        <div>{application.jobTitle}</div>
-                        <h5>Notes</h5>
-                        <div>{application.notes}</div>
-                    </div>
-                </Link>
-            ))}             
+                <Card className="m-2" key={application._id} onClick={()=>{setOpen(o => !o); setPopupApplicationId(application._id)}}>
+                    <Card.Body>
+                        <h5>{application.jobTitle}</h5>
+                        <p>{application.status}</p>
+                        <p>{application.notes}</p>
+                    </Card.Body>
+                </Card>
+            ))}
+            <Popup 
+                open={open}
+                closeOnDocumentClick
+                onClose={closeModal}
+            >
+                <ApplicationDetailsPage applicationId={popupApplicationId} />
+            </Popup>             
         </>
     )
 }

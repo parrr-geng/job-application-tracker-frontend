@@ -31,8 +31,7 @@ function App() {
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
 
         <Route path="/dashboard" element={<IsPrivate> <DashboardPage /> </IsPrivate>} />
-        <Route path="/profile/:userId" element={<IsPrivate> <ProfilePage /> </IsPrivate>} />
-        <Route path="/profile/:userId/edit" element={<IsPrivate> <EditProfilePage /> </IsPrivate>} />
+        <Route path="/:userId/profile/edit" element={<IsPrivate> <EditProfilePage/> </IsPrivate>} />
 
         <Route path="/:userId/jobs" element={<IsPrivate> <AllMyJobsPage /> </IsPrivate>} />
         <Route path="/:userId/job/create" element={<IsPrivate> <CreateNewJobPage /> </IsPrivate>} />

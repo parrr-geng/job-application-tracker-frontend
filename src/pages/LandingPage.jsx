@@ -1,7 +1,11 @@
 import "./LandingPage.css";
 import githubLogo from "../assets/githubLogo.png";
+import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import ContactUsPage from "./ContactUsPage";
 
 function LandingPage(){
 
@@ -10,12 +14,15 @@ function LandingPage(){
         x.style.display === "block" ? x.style.display = "none" : x.style.display = "block";
     }
 
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
 
     return (
         <div className="LandingPage shadow">
             
-            <div className="d-flex flex-row-reverse">
-                <img className="border border-top-0 border-dark p-3 me-2" src={githubLogo} style={{ width: 60, height: 60}} alt="github logo" />   
+            <div className="d-flex flex-row-reverse justify-content-between">
+                <img className="border border-top-0 border-dark p-3 me-2" src={githubLogo} style={{ width: 60, height: 60}} alt="github logo" /> 
+                <Link to="/" className="Logo"><h3 className="ms-4 p-3 fw-bold">J..</h3></Link>
             </div>
 
             <section className="header row my-5">
@@ -68,10 +75,18 @@ function LandingPage(){
                 <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Pricing")}>
                     <Link className="text-decoration-none text-dark">Pricing</Link>
                 </div>
-                <div className="p-3 Link ">
-                    <Link className="text-decoration-none text-dark">Contact us</Link>
+                <div className="p-3 Link" onClick={()=>setOpen(o => !o)}>
+                    <Link className="text-decoration-none text-dark">Contact Us</Link>
                 </div>
             </footer>
+
+            <Popup 
+                open={open}
+                closeOnDocumentClick
+                onClose={closeModal}
+            >
+                <ContactUsPage />
+            </Popup>
             
 
             

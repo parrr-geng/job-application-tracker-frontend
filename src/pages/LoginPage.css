@@ -3,9 +3,15 @@
     border: solid 1px black;
 }
 
+.LoginPage .Logo {
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
 .LoginPage .header {
     text-align: left;
-    height: 89vh;
+    height: 82vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

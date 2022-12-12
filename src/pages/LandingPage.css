@@ -3,7 +3,13 @@
     border: solid 1px black;
 }
 
-.header {
+.LandingPage .Logo {
+    text-align: left;
+    text-decoration: none;
+    color: black;
+}
+
+.LandingPage .header {
     text-align: left;
     padding: 4vh;
     height: 65vh;
