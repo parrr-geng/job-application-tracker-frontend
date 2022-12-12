@@ -42,6 +42,7 @@ function JobDetailsPage(){
             <h4>{oneJob.recruiter}</h4>
             <p>{oneJob.description}</p>
 
+            <Link to={`/jobs/${oneJob._id}/apply`}>Apply</Link>
             <Link to={`/jobs/${oneJob._id}/edit`}>Edit</Link>
             <Button onClick={()=>{deleteJob(oneJob._id)}}>delete</Button>
         </div>
