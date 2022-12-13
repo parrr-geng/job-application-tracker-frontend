@@ -2,6 +2,7 @@ import "./DashboardPage.css";
 import { useContext, useState } from "react";
 import Popup from "reactjs-popup";
 import { Card } from "react-bootstrap";
+import * as Icon from 'react-bootstrap-icons';
 import { AuthContext } from "../context/auth.context"; 
 
 import AllMyJobsPage from "../pages/Job/AllMyJobsPage";
@@ -26,14 +27,16 @@ function DashboardPage(){
 
     return(
         <div className="DashboardPage">
-            <div className="row ">
+            <div className="row">
                 <div className="col bg-light">
-                    <Sidebar /> 
+                    <Sidebar />
                 </div>
                 <div className="col-11">
-                    <div className="d-flex flex-row justify-content-between p-3">
-                        <SearchField setSearch = {setSearch} />
-                        <div>
+                    <div className="row d-flex flex-row p-3">
+                        <div className="col-6">
+                            <SearchField setSearch = {setSearch} />
+                        </div>
+                        <div className="col-4">
                             <button className="mx-1" onClick={()=>toggleDisplay("Wishlist")}>WishList</button>
                             <button className="mx-1" onClick={()=>toggleDisplay("Applied")}>Applied</button>
                             <button className="mx-1" onClick={()=>toggleDisplay("InProcess")}>In Process</button>

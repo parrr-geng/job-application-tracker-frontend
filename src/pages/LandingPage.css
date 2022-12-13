@@ -30,7 +30,11 @@
     background-color: RGB(255, 193, 7);
 }
 
-#Aboutus,
+.ApiJob:hover{
+    background-color: RGB(255, 193, 7);
+}
+
+#Jobs,
 #Howitworks,
 #Pricing 
 {

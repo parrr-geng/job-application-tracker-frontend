@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; 
 import Popup from "reactjs-popup";
 import ProfilePage from "../pages/User/ProfilePage";
+import { Button } from "react-bootstrap";
 
 function Sidebar(){
     const { user, logOutUser } = useContext(AuthContext);
@@ -17,21 +18,29 @@ function Sidebar(){
 
     return(
         <div className="Sidebar">
-            <div className="my-4">Hi {user.name}</div>
-            <div>
-                <Link to="/dashboard">
-                    Dashboard
-                </Link>
+            <div className="d-flex flex-column align-content-between">
+                <div>
+                    <div>
+                        <Link to="/dashboard">Dashboard</Link>
+                    </div>
+                    <div>
+                        <Link to={`/profile/${userId}`}>Calendar</Link>
+                    </div>
+                    <div onClick={()=>setOpen(o => !o)}>
+                        Profile 
+                    </div>
+
+                    <br />
+                    <br />
+                    <div>
+                        <Link to="/">Home</Link>
+                    </div>
+                </div>
+
+                <div size="sm" onClick={logOutUser}> Logout </div> 
+
             </div>
-            <div>
-                <Link to={`/profile/${userId}`}>
-                    Calendar
-                </Link>
-            </div>
-            <div onClick={()=>setOpen(o => !o)}>
-                    My Profile 
-            </div>   
-            <button onClick={logOutUser}> Logout </button> 
+
             <Popup 
                 open={open}
                 closeOnDocumentClick

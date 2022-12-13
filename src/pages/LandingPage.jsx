@@ -1,11 +1,13 @@
 import "./LandingPage.css";
+import axios from "axios";
 import githubLogo from "../assets/githubLogo.png";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import ContactUsPage from "./ContactUsPage";
+import { useEffect } from "react";
 
 function LandingPage(){
 
@@ -16,6 +18,13 @@ function LandingPage(){
 
     const [open, setOpen] = useState(false);
     const closeModal = () => setOpen(false);
+
+    const [apiJobs, setApiJobs] = useState([]);
+    useEffect(()=>{
+        axios.get("https://devitjobs.us/api/jobsLight")
+        .then(response=> setApiJobs(response.data))
+        .catch(error=>console.log(error))
+    }, [])
 
     return (
         <div className="LandingPage shadow">
@@ -44,30 +53,43 @@ function LandingPage(){
                 </div>
             </section>
 
-            <section id="Aboutus">
+            <section id="Jobs">
                 <div className="p-4">
-                    <h3>About Us</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
+                    <h3 className="mb-4">Jobs</h3>
+                    <div className="d-flex flex-row flex-wrap">
+                        {apiJobs.slice(0, 15).map(job=>(
+                            <Card className="m-1 ApiJob">
+                                <Card.Title className="m-2">{job.name} | {job.company}</Card.Title>
+                            </Card>
+                        ))}
+                    </div>
                 </div>
             </section>
 
             <section id="Howitworks">
                 <div className="p-4">
-                    <h3>How It Works</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
+                    <h3 className="mb-4">How It Works</h3>
+                    <iframe width="672" height="378" 
+                        src="https://www.youtube.com/embed/oTahLEX3NXo" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    >
+                    </iframe>
                 </div>
             </section>
 
             <section id="Pricing">
                 <div className="p-4">
-                    <h3>Pricing</h3>
+                    <h3 className="mb-4">Pricing</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
                 </div>
             </section>
 
             <footer className="grid-container">
-                <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Aboutus")}>
-                    <Link className="text-decoration-none text-dark">About us</Link>
+                <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Jobs")}>
+                    <Link className="text-decoration-none text-dark">Jobs</Link>
                 </div>
                 <div className="grid-item p-3 Link" onClick={()=>toggleDisplay("Howitworks")}>
                     <Link className="text-decoration-none text-dark">How it works?</Link>

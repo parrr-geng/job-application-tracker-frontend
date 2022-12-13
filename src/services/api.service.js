@@ -1,14 +1,12 @@
 import axios from 'axios';
 
-class ExampleService {
+class ApiService {
   constructor() {
     this.api = axios.create({
       baseURL: process.env.REACT_APP_SERVER_URL || "http://localhost:5005"
     });
 
-    // Automatically set JWT token in the headers for every request
     this.api.interceptors.request.use((config) => {
-      // Retrieve the JWT token from the local storage
       const storedToken = localStorage.getItem("authToken");
 
       if (storedToken) {
@@ -44,10 +42,17 @@ class ExampleService {
     return this.api.delete(`/api/examples/${id}`);
   } 
 
+  uploadImage = async (file) => {
+    return this.api.post("/api/upload", file);
+  }
+
+  contactUs = async (requestBody) => {
+    return this.api.post("/api/contact", requestBody);
+  }
 
 }
 
 // Create one instance of the service
-const exampleService = new ExampleService();
+const service = new ApiService();
 
-export default exampleService;
+export default service;

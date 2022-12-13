@@ -3,12 +3,14 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { AuthContext } from "../../context/auth.context"; 
+import service from "../../services/api.service";
 
 
 function EditProfilePage () {
     const [oneUser, setOneUser] = useState({});
 
     const [name, setName] = useState("");
+    const [profileImageURL, setProfileImageURL] = useState("");
     const [location, setLocation] = useState("");
     const [about, setAbout] = useState("");
     const [website, setWebsite] = useState("");
@@ -31,6 +33,7 @@ function EditProfilePage () {
             setOneUser(oneUser);
 
             setName(oneUser.name);
+            setProfileImageURL(oneUser.profileImageURL);
             setLocation(oneUser.location);
             setAbout(oneUser.about);
             setWebsite(oneUser.website);
@@ -43,17 +46,28 @@ function EditProfilePage () {
           .catch(err => console.log(err));  
       }, [userId]);
     
+    const handleFileUpload = e => {
+        const uploadData = new FormData();
+        uploadData.append("profileImageURL", e.target.files[0])
+
+        service
+        .uploadImage(uploadData)
+        .then(response => {
+            setProfileImageURL(response.data.fileUrl);
+            console.log(response.data.fileUrl);
+        })
+        .catch(err => console.log("Error while uploading the file: ", err)); 
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const requestBody = {name, location, about, website, experience, education, certifications, languages, skills};
-        //console.log(languages);
+        const requestBody = {name, profileImageURL, location, about, website, experience, education, certifications, languages, skills};
 
         axios
-          .put(`${baseURL}/api/profile/${userId}`, requestBody)
+          .put(`${baseURL}/api/profile/${userId}/edit`, requestBody)
           .then(response => {
             setOneUser(response.data);
-            navigate(`/profile/${userId}`);
+            navigate(`/dashboard`);
           })
           .catch(err => console.log(err));
     }
@@ -68,6 +82,9 @@ function EditProfilePage () {
                 <div className="col-8 text-left">
                     <h2>Edit Your Profile</h2>
                     <form onSubmit = { handleSubmit }>
+
+                        <label>Profile Image</label>
+                        <input type="file" name="profileImage" onChange={e => handleFileUpload(e)} />
                      
                         <label>Name</label><br />
                         <input type="text" name="name" onChange={e => setName(e.target.value)} placeholder={oneUser.name}/>
