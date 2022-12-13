@@ -28,8 +28,8 @@ class ApiService {
   }
 
   // GET /api/examples/:id
-  getOne = async (id) => {
-    return this.api.get(`/api/examples/${id}`);
+  getJob = async (id) => {
+    return this.api.get(`/api/jobs/${id}`);
   }
 
   // PUT /api/examples/:id
@@ -38,8 +38,8 @@ class ApiService {
   }
 
   // DELETE /api/examples/:id
-  deleteProject = async (id) => {
-    return this.api.delete(`/api/examples/${id}`);
+  deleteJob = async (id) => {
+    return this.api.delete(`/api/jobs/${id}/delete`);
   } 
 
   uploadImage = async (file) => {

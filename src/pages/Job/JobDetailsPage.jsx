@@ -1,34 +1,26 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
+import service from "../../services/api.service";
 
 function JobDetailsPage(props){
     const { jobId } = props;
-    console.log(props);
     const [ oneJob, setOneJob ] = useState({});
-
-    const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
     const navigate = useNavigate();
 
     useEffect(()=>{
-        axios
-        .get(`${baseURL}/api/jobs/${jobId}`)
-        .then(response => {
-            setOneJob(response.data);
-        })
+        service
+        .getJob(jobId)
+        .then(response => setOneJob(response.data))
         .catch(error => console.log(error))
     }, [jobId])
 
-    const deleteJob = (jobId) => {                 
-        axios
-          .delete(`${baseURL}/api/jobs/${jobId}/delete`)
-          .then(() => {
-            navigate("/dashboard");
-          })
-          .catch((err) => console.log(err));  
-    }; 
+    const handleDelete = (jobId) => {
+        service
+        .deleteJob(jobId)
+        .then(() => navigate("/dashboard"))
+        .catch((err) => console.log(err));          
+    }
 
     return(
         <div className="p-2">
@@ -47,7 +39,7 @@ function JobDetailsPage(props){
             <div className="d-flex flex-row">
                 <Link className="me-2" to={`/jobs/${oneJob._id}/apply`}><Button>Apply</Button></Link>
                 <Link className="me-2" to={`/jobs/${oneJob._id}/edit`}><Button>Edit</Button></Link>
-                <Button className="me-2" onClick={()=>{deleteJob(oneJob._id)}}>Delete</Button>
+                <Button className="me-2" onClick={()=>{handleDelete(oneJob._id)}}>Delete</Button>
                 <Button className="me-2">Share</Button>
             </div>
 

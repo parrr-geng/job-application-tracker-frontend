@@ -1,9 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-
 import { Link } from "react-router-dom";
 import { Button, Stack } from "react-bootstrap";
-
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to

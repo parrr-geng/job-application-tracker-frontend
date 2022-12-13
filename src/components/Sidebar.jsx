@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; 
 import Popup from "reactjs-popup";
 import ProfilePage from "../pages/User/ProfilePage";
-import { Button } from "react-bootstrap";
 
 function Sidebar(){
     const { user, logOutUser } = useContext(AuthContext);
@@ -34,6 +33,9 @@ function Sidebar(){
                     <br />
                     <div>
                         <Link to="/">Home</Link>
+                    </div>
+                    <div>
+                        <Link to="/jobs">All Jobs</Link>
                     </div>
                 </div>
 

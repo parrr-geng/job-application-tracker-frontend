@@ -47,33 +47,44 @@ function CreateNewApplicationPage(){
     
 
     return(
-        <>  
-            <Sidebar />
-            <form onSubmit = {handleSubmit}>
-                <h5>Application for {jobTitle}</h5>
+        <div>  
+            <div className="row">
+                <div className="col bg-light">
+                    <Sidebar />
+                </div>
+                <div className="col-11 CreateNewApplication">
+                    <form onSubmit = {handleSubmit}>
+                        <h5>Application for {jobTitle}</h5>
+                        <br />
 
-                <label>Status</label>
-                <select onChange={e => setApplicationStatus(e.target.value)}>
-                    <option>Choose a Status</option>
-                    <option value="Wishlist">Wishlist</option>
-                    <option value="Applied">Applied</option>
-                    <option value="In Process">In Process</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Offer">Offer</option>
-                </select>
+                        <label>Status</label><br />
+                        <select onChange={e => setApplicationStatus(e.target.value)}>
+                            <option>Choose a Status</option>
+                            <option value="Wishlist">Wishlist</option>
+                            <option value="Applied">Applied</option>
+                            <option value="In Process">In Process</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Offer">Offer</option>
+                        </select>
+                        <br />
 
-                <label>Cover Letter</label>
-                <textarea name="coverLetter" cols="30" rows="5" onChange={e => setCoverLetter(e.target.value)}></textarea>
+                        <label>Cover Letter</label><br />
+                        <textarea name="coverLetter" cols="30" rows="5" onChange={e => setCoverLetter(e.target.value)}></textarea>
+                        <br />
 
-                <label>Notes</label>
-                <textarea name="notes" cols="30" rows="5" onChange={e=>setNotes(e.target.value)}></textarea>
+                        <label>Notes</label><br />
+                        <textarea name="notes" cols="30" rows="5" onChange={e=>setNotes(e.target.value)}></textarea>
+                        <br />
 
-                <label>Date of Application</label>
-                <input name="dateApplied" type="date" onChange = {e => setDateApplied(e.target.value)} /> 
+                        <label>Date of Application</label><br />
+                        <input name="dateApplied" type="date" onChange = {e => setDateApplied(e.target.value)} /> 
+                        <br />
 
-                <button type="submit">Add this Application</button>
-            </form>
-        </>
+                        <button type="submit">Add this Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     )
 }
 

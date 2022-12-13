@@ -11,7 +11,6 @@ function ContactUsPage(){
         service
         .contactUs(requestBody)
         .then(response => {
-            window.location.reload();
         })
         .catch(error => console.log(error))
     }

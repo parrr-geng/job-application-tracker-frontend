@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Row, Col, Button, Form, FloatingLabel } from "react-bootstrap";
+import service from "../../services/api.service";
+import Sidebar from "../../components/Sidebar";
 
 function EditJobPage(){
     const [oneJob, setOneJob] = useState({});
@@ -26,7 +28,6 @@ function EditJobPage(){
             })
           .catch(err => console.log(err));  
       }, []);
-    //console.log(oneJob);
     
     const handleSubmit = e => {
         e.preventDefault();
@@ -47,46 +48,67 @@ function EditJobPage(){
         .catch(err=>console.log(err))
     };
 
-    const deleteJob = (jobId) => {                 
-        axios
-          .delete(`${baseURL}/api/jobs/${jobId}/delete`)
-          .then(() => {
-            navigate("/dashboard");
-          })
-          .catch((err) => console.log(err));  
-    };
+    const handleDelete = (jobId) => {
+        service
+        .deleteJob(jobId)
+        .then(() => navigate("/dashboard"))
+        .catch((err) => console.log(err));          
+    }
 
     return(
-        <div>
-            <h2>Edit this Job</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Title</label>
-                <input type="text" name="title" placeholder={oneJob.title} onChange={e=>setTitle(e.target.value)} required/>
+        <div className="row">
+            <div className="col bg-light">
+                <Sidebar />
+            </div>
+            <div className="col-11">
+                <h3 className="my-4">Edit</h3>
+                <Form onSubmit={handleSubmit} className="p-3">
+                    <Row className="g-3 my-2">
+                        <Col md>
+                            <FloatingLabel controlId="floatingInput1" label="Title">
+                                <Form.Control type="text" name="title" placeholder={oneJob.title} onChange={e=>setTitle(e.target.value)} required />
+                            </FloatingLabel>
+                        </Col>
+                        <Col md>
+                            <FloatingLabel controlId="floatingInput2" label="Company">
+                                <Form.Control type="text" name="company" placeholder={oneJob.company} onChange={e=>setCompany(e.target.value)} required />
+                            </FloatingLabel>
+                        </Col>
+                        <Col md>
+                            <FloatingLabel controlId="floatingInput3" label="Recruiter">
+                                <Form.Control type="text" name="recruiter" placeholder={oneJob.recruiter} onChange={e=>setRecruiter(e.target.value)} required />
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+                    <Row className="g-2">
+                        <Col md>
+                            <FloatingLabel controlId="floatingInput4" label="Location">
+                                <Form.Control type="text" name="location" placeholder={oneJob.location} onChange={e=>setLocation(e.target.value)} required />
+                            </FloatingLabel>
+                        </Col>
+                        <Col md>
+                            <FloatingLabel controlId="floatingSelectGrid" label="Job Type">
+                                <Form.Select aria-label="Flating label select">
+                                    <option>Select a job type</option>
+                                    <option value="Full-time">Full-time</option>
+                                    <option value="Part-time">Part-time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Internship">Internship</option>
+                                </Form.Select>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
 
-                <label>Company</label>
-                <input type="text" name="company" placeholder={oneJob.company} onChange={e=>setCompany(e.target.value)} required/>
+                    <Col className="my-2">
+                        <FloatingLabel controlId="floatingTextarea" label="Description">
+                            <Form.Control as="textarea" name="description" placeholder={oneJob.description} onChange={e=>setDescription(e.target.value)} style={{ height: '200px' }} />
+                        </FloatingLabel>
+                    </Col>
 
-                <label>Location</label>
-                <input type="text" name="location" placeholder={oneJob.location} onChange={e=>setLocation(e.target.value)} required/>
-
-                <label>Job Type</label>
-                <select name="jobType" onChange={e=>setJobType(e.target.value)} required>
-                    <option>Select a job type</option>
-                    <option value="Full-time">Full-time</option>
-                    <option value="Part-time">Part-time</option>
-                    <option value="Contract">Contract</option>
-                    <option value="Internship">Internship</option>
-                </select>
-
-                <label>Recruiter</label>
-                <input type="text" name="recruiter" placeholder={oneJob.recruiter} onChange={e=>setRecruiter(e.target.value)} required/>
-
-                <label>Description</label>
-                <textarea name="description" cols="30" rows="5" placeholder={oneJob.description} onChange={e=>setDescription(e.target.value)}></textarea>
-
-                <button type="submit">Save</button>
-                <Button onClick={()=>{deleteJob(oneJob._id)}}>delete</Button>
-            </form>
+                    <Button type="submit">Save</Button>
+                
+                </Form>
+            </div>
         </div>
     )
 }
