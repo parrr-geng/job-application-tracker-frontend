@@ -18,12 +18,16 @@ function JobDetailsPage(props){
     const handleDelete = (jobId) => {
         service
         .deleteJob(jobId)
-        .then(() => navigate("/dashboard"))
+        .then(() => {
+            navigate("/dashboard");
+            window.location.reload();
+
+        })
         .catch((err) => console.log(err));          
     }
 
     return(
-        <div className="p-2">
+        <div className="p-4">
             <h6>Job Title:</h6>
             <h5>{oneJob.title}</h5>
             <h6>Company:</h6>
@@ -37,10 +41,10 @@ function JobDetailsPage(props){
             <h6>Description:</h6>
             <p>{oneJob.description}</p>
             <div className="d-flex flex-row">
-                <Link className="me-2" to={`/jobs/${oneJob._id}/apply`}><Button>Apply</Button></Link>
-                <Link className="me-2" to={`/jobs/${oneJob._id}/edit`}><Button>Edit</Button></Link>
-                <Button className="me-2" onClick={()=>{handleDelete(oneJob._id)}}>Delete</Button>
-                <Button className="me-2">Share</Button>
+                <Link className="me-2" to={`/jobs/${oneJob._id}/apply`}><Button variant="dark">Apply</Button></Link>
+                <Link className="me-2" to={`/jobs/${oneJob._id}/edit`}><Button variant="dark">Edit</Button></Link>
+                <Button variant="dark" className="me-2" onClick={()=>{handleDelete(oneJob._id)}}>Delete</Button>
+                <Button variant="dark" className="me-2">Share</Button>
             </div>
 
         </div>

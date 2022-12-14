@@ -1,0 +1,9 @@
+.Sidebar {
+    height: 100vh;
+    padding: 2vh;
+    text-align: left;
+    text-decoration: none;
+    line-height: 200%;
+    color: black;
+    background-color: rgb(255, 193, 7);
+}

@@ -18,8 +18,8 @@ class ApiService {
   }
 
   // POST /api/examples
-  createOne = async (requestBody) => {
-    return this.api.post('/api/examples', requestBody);
+  createJob = async (userId, requestBody) => {
+    return this.api.post(`${userId}/job/create`, requestBody);
   }
 
   // GET /api/examples

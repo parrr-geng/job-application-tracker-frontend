@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Form, Button, FormGroup } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import { AuthContext } from "../../context/auth.context"; 
 
@@ -49,39 +50,47 @@ function CreateNewApplicationPage(){
     return(
         <div>  
             <div className="row">
-                <div className="col bg-light">
+                <div className="col">
                     <Sidebar />
                 </div>
-                <div className="col-11 CreateNewApplication">
-                    <form onSubmit = {handleSubmit}>
-                        <h5>Application for {jobTitle}</h5>
-                        <br />
+                <div className="col-10 row p-4" style={{"textAlign":"left"}}>
+                    <Form className="col-8" onSubmit = {handleSubmit}>
+                        <h5 className="my-4">Application</h5>
 
-                        <label>Status</label><br />
-                        <select onChange={e => setApplicationStatus(e.target.value)}>
+                        <h5 className="mb-3">{jobTitle}</h5>
+
+                        <Form.Select className="mb-3" onChange={e => setApplicationStatus(e.target.value)}>
                             <option>Choose a Status</option>
                             <option value="Wishlist">Wishlist</option>
                             <option value="Applied">Applied</option>
                             <option value="In Process">In Process</option>
                             <option value="Rejected">Rejected</option>
                             <option value="Offer">Offer</option>
-                        </select>
-                        <br />
+                        </Form.Select>
 
-                        <label>Cover Letter</label><br />
-                        <textarea name="coverLetter" cols="30" rows="5" onChange={e => setCoverLetter(e.target.value)}></textarea>
-                        <br />
+                        <FormGroup className="mb-3">
+                            <Form.Label>Cover Letter</Form.Label>
+                            <Form.Control name="coverLetter" as="textarea"
+                            style={{"height": 200 }} 
+                            onChange={e => setCoverLetter(e.target.value)} />
+                        </FormGroup>
 
-                        <label>Notes</label><br />
-                        <textarea name="notes" cols="30" rows="5" onChange={e=>setNotes(e.target.value)}></textarea>
-                        <br />
+                        <FormGroup className="mb-3">
+                            <Form.Label>Notes</Form.Label>
+                            <Form.Control name="notes" as="textarea" 
+                            style={{"height": 100 }} 
+                            onChange={e=>setNotes(e.target.value)} />
+                        </FormGroup>
 
-                        <label>Date of Application</label><br />
-                        <input name="dateApplied" type="date" onChange = {e => setDateApplied(e.target.value)} /> 
-                        <br />
+                        <FormGroup className="mb-3">
+                            <Form.Label>Applied At</Form.Label>
+                            <Form.Control name="dateApplied" type="date"
+                            onChange = {e => setDateApplied(e.target.value)} />
+                        </FormGroup>
 
-                        <button type="submit">Add this Application</button>
-                    </form>
+                        <Button variant="dark" type="submit">Add this Application</Button>
+                    </Form>
+                    <div className="col-2"></div>
                 </div>
             </div>
         </div>

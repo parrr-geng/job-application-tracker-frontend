@@ -1,14 +1,13 @@
 import "./DashboardPage.css";
 import { useContext, useState } from "react";
 import Popup from "reactjs-popup";
-import { Card } from "react-bootstrap";
+import { Card, Button, ButtonToolbar, Badge } from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
 import { AuthContext } from "../context/auth.context"; 
 
 import AllMyJobsPage from "../pages/Job/AllMyJobsPage";
 import Sidebar from "../components/Sidebar";
 import ApplicationsPage from "./Application/ApplicationsPage";
-import SearchField from "../components/SearchField";
 import CreateNewJobPage from "./Job/CreateNewJobPage";
 
 
@@ -28,31 +27,31 @@ function DashboardPage(){
     return(
         <div className="DashboardPage">
             <div className="row">
-                <div className="col bg-light">
+                <div className="col">
                     <Sidebar />
                 </div>
-                <div className="col-11">
-                    <div className="row d-flex flex-row p-3">
-                        <div className="col-6">
-                            <SearchField setSearch = {setSearch} />
-                        </div>
-                        <div className="col-4">
-                            <button className="mx-1" onClick={()=>toggleDisplay("Wishlist")}>WishList</button>
-                            <button className="mx-1" onClick={()=>toggleDisplay("Applied")}>Applied</button>
-                            <button className="mx-1" onClick={()=>toggleDisplay("InProcess")}>In Process</button>
-                            <button className="mx-1" onClick={()=>toggleDisplay("Rejected")}>Rejected</button>
-                            <button className="mx-1" onClick={()=>toggleDisplay("Offer")}>Offer</button>
+                <div className="col-10">
+                    <div className="row d-flex flex-row py-3">
+                        <div className="col-5">
+                               {/* <Badge pill className="mx-1" onClick={()=>toggleDisplay("Jobs")}>Jobs</Badge> */}
+                                <Badge pill bg="dark" onClick={()=>toggleDisplay("Wishlist")}>WishList</Badge>
+                                <Badge pill bg="dark" className="mx-1" onClick={()=>toggleDisplay("Applied")}>Applied</Badge>
+                                <Badge pill bg="dark" className="mx-1" onClick={()=>toggleDisplay("InProcess")}>In Process</Badge>
+                                <Badge pill bg="dark" className="mx-1" onClick={()=>toggleDisplay("Rejected")}>Rejected</Badge>
+                                <Badge pill bg="dark" className="mx-1" onClick={()=>toggleDisplay("Offer")}>Offer</Badge>
                         </div>
                     </div>
                     
                     <div className="row p-3">
-                        <div className="col-2">
+                        <div className="col-2" >
                             <h6 className="Category p-2">Job Posts</h6>
                             <Card className="text-decoration-none text-dark"
                             onClick={()=>setOpen(o => !o)}
                             > + 
                             </Card>
-                            <AllMyJobsPage search={search}/>
+                     
+                            <AllMyJobsPage search={search} />
+           
                         </div>
                         <div className="col" id="Wishlist">
                             <h6 className="Category p-2">Wishlist</h6>
@@ -80,7 +79,7 @@ function DashboardPage(){
                         </div>
                         <div className="col" id="Offer">
                             <h6 className="Category p-2">Offer!</h6>
-                            <div className="Applications border bg-dark text-light">
+                            <div className="Applications border border-dark">
                                 <ApplicationsPage status={"Offer"} search={search}/>
                             </div> 
                         </div>

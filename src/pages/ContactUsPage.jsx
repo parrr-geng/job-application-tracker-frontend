@@ -1,6 +1,7 @@
 import service from "../services/api.service";
 import "./ContactUsPage.css";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 function ContactUsPage(){
     const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ function ContactUsPage(){
                 <textarea cols="30" rows="5" name="message" placeholder="Please write your message here..." onChange={e => setMessage(e.target.value)} required >
                 </textarea>
                 <br /><br />
-                <button type="submit">Send</button>
+                <Button variant="dark" type="submit">Send</Button>
             </form>
         </div>
     )

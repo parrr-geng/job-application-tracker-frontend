@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useContext, useState} from "react";
 import { AuthContext } from "../../context/auth.context"; 
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 
 function ProfilePage() {
@@ -19,23 +20,26 @@ function ProfilePage() {
 
   return (
     <div>
-   
-      <div>
-        <h2>Profile page</h2>
-        <img src={oneUser.profileImageURL} alt="profile image" style={{height:50, width:50}}/>
-        <h3><span>{oneUser.name}</span></h3>
-        <h4>Location</h4>
-        <p>{oneUser.location}</p>
-        <h4>About</h4>
-        <p>{oneUser.about}</p>
-        <h4>Experience</h4>
-        <p>{oneUser.experience}</p>
-        <h4>Education</h4>
-        <p>{oneUser.education}</p>
-        <h4>Skills</h4>
-        <p>{oneUser.skills}</p>
+      <div className="p-4">
+        <h5>Profile</h5>
 
-        <Link to={`/${oneUser._id}/profile/edit`}>Edit</Link>
+        <img className="m-3" src={oneUser.profileImageURL} alt="profile image" style={{height:80, width:80, "border-radius":"50%"}}/>
+        <h3><span>{oneUser.name}</span></h3>
+        <p>{oneUser.location}</p>
+        <hr />
+        <h5>About</h5>
+        <p>{oneUser.about}</p>
+        <hr />
+        <h5>Experience</h5>
+        <p className="ps-2">{oneUser.experience}</p>
+        <hr />
+        <h4>Education</h4>
+        <p className="ps-2">{oneUser.education}</p>
+        <hr />
+        <h4>Skills</h4>
+        <p className="ps-2">{oneUser.skills}</p>
+
+        <Link to={`/${oneUser._id}/profile/edit`}><Button variant="dark">Edit</Button></Link>
 
       </div>
     </div>

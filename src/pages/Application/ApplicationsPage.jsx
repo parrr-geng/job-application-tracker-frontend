@@ -41,9 +41,8 @@ function ApplicationsPage(props){
             {applications.map(application => (
                 <Card className="m-2" key={application._id} onClick={()=>{setOpen(o => !o); setPopupApplicationId(application._id)}}>
                     <Card.Body>
-                        <h5>{application.jobTitle}</h5>
-                        <p>{application.status}</p>
-                        <p>{application.notes}</p>
+                        <Card.Title style={{"fontSize":16}}>{application.jobTitle}</Card.Title>
+                        <Card.Text style={{"fontSize":14}}>{application.notes}</Card.Text>
                     </Card.Body>
                 </Card>
             ))}

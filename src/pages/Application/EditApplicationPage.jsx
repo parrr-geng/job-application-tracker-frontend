@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Row, Col, Form, FormGroup, Button } from "react-bootstrap";
+import Sidebar from "../../components/Sidebar";
 
 function EditApplicationPage(){
     const [oneApplication, setOneApplication] = useState({});
@@ -43,35 +45,54 @@ function EditApplicationPage(){
 
 
     return(
-        <form onSubmit = {handleSubmit}>
-            <h5>Edit your application for {oneApplication.jobTitle}</h5>
+        <div className="row">
+            <div className="col">
+                <Sidebar />
+            </div>
+            <div className="col-10 row p-4" style={{"textAlign":"left"}}>
+                <Form onSubmit = {handleSubmit}>
+                    <h5 className="my-4">Edit Your Application</h5>
+                    <h5 className="mb-3">{oneApplication.jobTitle}</h5>
 
-            <label>Status</label>
-            <select onChange={e => setApplicationStatus(e.target.value)}>
-                <option>Choose a status</option>
-                <option value="Wishlist">Wishlist</option>
-                <option value="Applied">Applied</option>
-                <option value="In Process">In Process</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Offer">Offer</option>
-            </select>
+                    <Form.Select className="mb-3" onChange={e => setApplicationStatus(e.target.value)}>
+                            <option>Choose a Status</option>
+                            <option value="Wishlist">Wishlist</option>
+                            <option value="Applied">Applied</option>
+                            <option value="In Process">In Process</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Offer">Offer</option>
+                    </Form.Select>
 
-            <label>Cover Letter</label>
-            <textarea name="coverLetter" cols="30" rows="5" 
-            placeholder={oneApplication.coverLetter}
-            onChange={e => setCoverLetter(e.target.value)}></textarea>
+                    <FormGroup className="mb-3">
+                        <Form.Label>Cover Letter</Form.Label>
+                        <Form.Control name="coverLetter" as="textarea"
+                        style={{"height": 200 }} 
+                        placeholder={oneApplication.coverLetter}
+                        onChange={e => setCoverLetter(e.target.value)} />
+                    </FormGroup>
 
-            <label>Notes</label>
-            <textarea name="notes" cols="30" rows="5" 
-            placeholder={oneApplication.notes}
-            onChange={e => setNotes(e.target.value)}></textarea>
+                    <FormGroup className="mb-3">
+                        <Form.Label>Notes</Form.Label>
+                        <Form.Control name="notes" as="textarea" 
+                        style={{"height": 100 }} 
+                        placeholder={oneApplication.notes}
+                        onChange={e=>setNotes(e.target.value)} />
+                    </FormGroup>
 
-            <label>Date of Application</label>
-            <input name="dateApplied" type="date" 
-            onChange={e => setDateApplied(e.target.value)} /> 
+                    <FormGroup className="mb-3">
+                        <Form.Label>Applied At</Form.Label>
+                        <Form.Control name="dateApplied" type="date"
+                        placeholder = {oneApplication.dateApplied}
+                        onChange = {e => setDateApplied(e.target.value)} />
+                    </FormGroup>
 
-            <button type="submit">Save</button>
-        </form>
+
+                    <Button variant="dark" type="submit">Save</Button>
+                </Form>
+
+            </div>
+        </div>
+       
     )
 }
 

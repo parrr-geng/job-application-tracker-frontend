@@ -38,12 +38,11 @@ function ApplicationDetailsPage(props){
     }
 
     return(
-        <div>
+        <div className="p-4">
             <div>
-                <h6>Job Title</h6>
                 <h6>{oneApplication.jobTitle}</h6>
-                <h6>Application Status</h6>
-                <select onChange={handleChange}>
+
+                <select className="d-inline" onChange={handleChange}>
                     <option value="" disabled selected hidden>{oneApplication.status}</option>
                     <option value="Wishlist">Wishlist</option>
                     <option value="Applied">Applied</option>
@@ -51,14 +50,16 @@ function ApplicationDetailsPage(props){
                     <option value="Rejected">Rejected</option>
                     <option value="Offer">Offer</option>
                 </select>
+                <hr />
                 <h6>Notes</h6>
                 <p>{oneApplication.notes}</p>
+                <hr />
                 <h6>Cover Letter</h6>
                 <p>{oneApplication.coverLetter}</p>
             </div>
             <div>
-                <Link to={`/applications/${oneApplication._id}/edit`}><Button>Edit</Button></Link>
-                <button onClick={()=>{deleteApplication(oneApplication._id)}}>Delete</button>
+                <Link to={`/applications/${oneApplication._id}/edit`}><Button variant="dark">Edit</Button></Link>
+                <Button variant="dark" className="ms-2" onClick={()=>{deleteApplication(oneApplication._id)}}>Delete</Button>
             </div>
         </div>
 

@@ -34,8 +34,8 @@ function AllMyJobsPage(){
                 jobs.map(job =>(
                     <Card className="my-2">
                         <Card.Body key={job._id} onClick={()=>{setOpen(o => !o); setPopupJobId(job._id)}}>
-                            <h6>{job.title}</h6>
-                            <p>{job.company}, {job.jobType}</p>
+                            <Card.Title style={{"fontSize":16}}>{job.title}</Card.Title>
+                            <Card.Text style={{"fontSize":14}}>{job.company}, {job.jobType}</Card.Text>
                         </Card.Body>          
                     </Card>
                 ))

@@ -21,6 +21,7 @@ import CreateNewApplicationPage from "./pages/Application/CreateNewApplicationPa
 import ApplicationsPage from "./pages/Application/ApplicationsPage";
 import ApplicationDetailsPage from "./pages/Application/ApplicationDetailsPage";
 import EditApplicationPage from "./pages/Application/EditApplicationPage";
+import AllJobsPage from "./pages/AllJobsPage";
 
 function App() {
   return (
@@ -29,10 +30,11 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<IsAnon> <SignupPage /> </IsAnon>} />
         <Route path="/login" element={<IsAnon> <LoginPage /> </IsAnon>} />
-
+        
         <Route path="/dashboard" element={<IsPrivate> <DashboardPage /> </IsPrivate>} />
         <Route path="/:userId/profile/edit" element={<IsPrivate> <EditProfilePage/> </IsPrivate>} />
 
+        <Route path="/jobs" element={<AllJobsPage />} />
         <Route path="/:userId/jobs" element={<IsPrivate> <AllMyJobsPage /> </IsPrivate>} />
         <Route path="/:userId/job/create" element={<IsPrivate> <CreateNewJobPage /> </IsPrivate>} />
         <Route path="/jobs/:jobId" element={<JobDetailsPage />} />
