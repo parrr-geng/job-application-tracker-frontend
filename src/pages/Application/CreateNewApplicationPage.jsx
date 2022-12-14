@@ -90,7 +90,8 @@ function CreateNewApplicationPage(){
 
                         <Button variant="dark" type="submit">Add this Application</Button>
                     </Form>
-                    <div className="col-2"></div>
+                    <div className="col-2">
+                    </div>
                 </div>
             </div>
         </div>

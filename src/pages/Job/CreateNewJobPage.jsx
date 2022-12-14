@@ -27,6 +27,7 @@ function CreateNewJobPage(){
         axios.post(`${baseURL}/api/${userId}/job/create`, reqBody)
         .then(response => {
             navigate("/dashboard");
+            window.location.reload();
             
             setTitle("");
             setCompany("");
@@ -36,12 +37,13 @@ function CreateNewJobPage(){
             setDescription("");
             setJobUrl("");
             setVisibility(false);
+            
         })
         .catch(err=>console.log(err))
     }
     
     return(
-        <div className="p-4">
+        <div className="px-4 py-2">
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="JobFormTitle">
                     <Form.Label>Job Title</Form.Label>
@@ -100,11 +102,11 @@ function CreateNewJobPage(){
                     <Form.Control name="jobUrl" type="url" placeholder="Link to the original job post" onChange={e=>setJobUrl(e.target.value)}/>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="JobFormPublic">
+                <Form.Group className="mb-5" controlId="JobFormPublic">
                     <Form.Check name="public" type="checkbox" label="Set the visibility to public" onChange={e => setVisibility(e.target.checked)}/>
                 </Form.Group>
 
-                <Button type="submit">Add this Job</Button>
+                <Button variant="dark" type="submit">Add this Job</Button>
             </Form>
         </div>
 

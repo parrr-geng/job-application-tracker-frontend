@@ -36,8 +36,7 @@ function AllJobsPage(){
             const notification = await axios.post(`${baseURL}/api/${userId}/job/create`, reqBody)
             if(notification){
                 {/* alert("successfully added to my own job list.") */}
-            }  
-         
+            }      
         } catch (error) {
             console.log(error);
         }
@@ -55,13 +54,13 @@ function AllJobsPage(){
                 </div>
             )}
             <div className="col-10">
-            <h5>Job Market</h5>
-            <div className="d-flex flex-row">
+            <h5 className="m-4">Job Market</h5>
+            <div className="p-4 d-flex flex-row flex-wrap">
                 {
                     jobs
                     .filter(job => job.createdBy !== user._id)    
                     .map(job =>(
-                        <Card className="mb-3 me-3" style={{width:"30vw"}}>
+                        <Card className="mb-3 me-3 col" style={{width:"30vw"}}>
                             <div className="d-flex flex-row justify-content-between">
                                 <div></div>
                                 <div className="p-3" onClick={() => copyToMyJobs(job._id)}>

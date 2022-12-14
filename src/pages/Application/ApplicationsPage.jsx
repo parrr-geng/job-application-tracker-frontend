@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import Popup from "reactjs-popup";
-import { Card } from "react-bootstrap";
+import { Card, Modal } from "react-bootstrap";
 import { AuthContext } from "../../context/auth.context"; 
 import ApplicationDetailsPage from "./ApplicationDetailsPage";
 
@@ -14,9 +13,11 @@ function ApplicationsPage(props){
     const { user } = useContext(AuthContext);
     const userId = user._id;
 
-    const [open, setOpen] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [popupApplicationId, setPopupApplicationId] = useState("");
-    const closeModal = () => setOpen(false);
+
 
     useEffect(()=>{
         axios.get(`${baseURL}/api/${userId}/applications/${status}`)
@@ -39,20 +40,22 @@ function ApplicationsPage(props){
     return (
         <>
             {applications.map(application => (
-                <Card className="m-2" key={application._id} onClick={()=>{setOpen(o => !o); setPopupApplicationId(application._id)}}>
+                <Card className="m-2" key={application._id} onClick={()=>{handleShow(); setPopupApplicationId(application._id)}}>
                     <Card.Body>
                         <Card.Title style={{"fontSize":16}}>{application.jobTitle}</Card.Title>
                         <Card.Text style={{"fontSize":14}}>{application.notes}</Card.Text>
                     </Card.Body>
                 </Card>
             ))}
-            <Popup 
-                open={open}
-                closeOnDocumentClick
-                onClose={closeModal}
-            >
-                <ApplicationDetailsPage applicationId={popupApplicationId} />
-            </Popup>             
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Application</Modal.Title>
+                </Modal.Header>
+                <Modal.Body scrollable>
+                    <ApplicationDetailsPage applicationId={popupApplicationId} />
+                </Modal.Body>
+            </Modal>      
         </>
     )
 }

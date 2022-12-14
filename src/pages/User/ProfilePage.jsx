@@ -1,9 +1,6 @@
 import axios from "axios";
 import { useEffect, useContext, useState} from "react";
 import { AuthContext } from "../../context/auth.context"; 
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-
 
 function ProfilePage() {
   const [ oneUser, setOneUser ] = useState({});
@@ -20,10 +17,8 @@ function ProfilePage() {
 
   return (
     <div>
-      <div className="p-4">
-        <h5>Profile</h5>
-
-        <img className="m-3" src={oneUser.profileImageURL} alt="profile image" style={{height:80, width:80, "border-radius":"50%"}}/>
+      <div className="px-4 py-2">
+        <img className="mb-3" src={oneUser.profileImageURL ? oneUser.profileImageURL : "https://www.pngkey.com/png/detail/202-2024792_user-profile-icon-png-download-fa-user-circle.png"} alt="profile image" style={{height:80, width:80, "border-radius":"50%"}} />
         <h3><span>{oneUser.name}</span></h3>
         <p>{oneUser.location}</p>
         <hr />
@@ -39,7 +34,7 @@ function ProfilePage() {
         <h4>Skills</h4>
         <p className="ps-2">{oneUser.skills}</p>
 
-        <Link to={`/${oneUser._id}/profile/edit`}><Button variant="dark">Edit</Button></Link>
+        
 
       </div>
     </div>

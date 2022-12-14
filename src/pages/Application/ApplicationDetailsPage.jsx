@@ -38,9 +38,9 @@ function ApplicationDetailsPage(props){
     }
 
     return(
-        <div className="p-4">
+        <div className="px-4 py-2">
             <div>
-                <h6>{oneApplication.jobTitle}</h6>
+                <h4>{oneApplication.jobTitle}</h4>
 
                 <select className="d-inline" onChange={handleChange}>
                     <option value="" disabled selected hidden>{oneApplication.status}</option>
@@ -51,11 +51,12 @@ function ApplicationDetailsPage(props){
                     <option value="Offer">Offer</option>
                 </select>
                 <hr />
-                <h6>Notes</h6>
-                <p>{oneApplication.notes}</p>
-                <hr />
                 <h6>Cover Letter</h6>
                 <p>{oneApplication.coverLetter}</p>
+
+                <hr />
+                <h6>Notes</h6>
+                <p>{oneApplication.notes}</p>
             </div>
             <div>
                 <Link to={`/applications/${oneApplication._id}/edit`}><Button variant="dark">Edit</Button></Link>

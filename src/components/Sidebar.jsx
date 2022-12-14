@@ -2,7 +2,7 @@ import "./Sidebar.css";
 import { useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; 
-import Popup from "reactjs-popup";
+import { Modal, Button } from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
 import ProfilePage from "../pages/User/ProfilePage";
 import SearchField from "./SearchField";
@@ -11,12 +11,9 @@ function Sidebar(){
     const { user, logOutUser } = useContext(AuthContext);
     const userId = user._id;
 
-    const [open, setOpen] = useState(false);
-    const closeModal = () => setOpen(false);
-
-    const contentStyle = { background: 'rgba(256,256,256,1)', overflow:"auto" };
-    const overlayStyle = { background: 'rgba(0,0,0,0.4)' };
-    const arrowStyle = { color: '#fff' };
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return(
         <div>
@@ -31,7 +28,7 @@ function Sidebar(){
                         </Link>
                     </div>
 
-                    <div onClick={()=>setOpen(o => !o)}>
+                    <div onClick={handleShow}>
                         <Icon.PersonCircle /> Profile 
                     </div>
 
@@ -43,7 +40,7 @@ function Sidebar(){
 
                     <div>
                         <Link to="/jobs" style={{"text-decoration":"none", color:"black"}}>
-                            <Icon.HddStack /> All Jobs
+                            <Icon.HddStack /> Explore
                         </Link>
                     </div>
 
@@ -55,14 +52,43 @@ function Sidebar(){
                 <hr className="mt-auto"/>
             </div>
 
-            <Popup 
-                open={open}
-                closeOnDocumentClick
-                onClose={closeModal}
-                {...{contentStyle, overlayStyle, arrowStyle}}
+            <Modal     
+            show={show} 
+            onHide={handleClose}
             >
-                <ProfilePage className="overflow-auto"/>
-            </Popup>
+                <Modal.Header closeButton>
+                <Modal.Title>Profile</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProfilePage/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link to={`/${user._id}/profile/edit`}>
+                        <Button variant="dark">
+                        Edit
+                        </Button>
+                    </Link>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* 
+                <Popup
+                    open={open}
+                    closeOnDocumentClick
+                    onClose={closeModal}
+                    {...{contentStyle, overlayStyle, arrowStyle}}
+                >
+        
+                    <ProfilePage className="overflow-auto"/>
+                </Popup>
+            */}
+ 
+
+      
+
 
 
         </div>

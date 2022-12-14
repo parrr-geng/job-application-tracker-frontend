@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "reactjs-popup";
 import { AuthContext } from "../../context/auth.context"; 
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Modal, ModalBody, ModalHeader, ModalFooter } from "react-bootstrap";
 import JobDetailsPage from "./JobDetailsPage";
 
 function AllMyJobsPage(){
@@ -24,29 +23,31 @@ function AllMyJobsPage(){
         .catch(error=>console.log(error))
     }
     
-    const [open, setOpen] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [popupJobId, setPopupJobId] = useState("");
-    const closeModal = () => setOpen(false);
      
     return(
         <>
             {
                 jobs.map(job =>(
                     <Card className="my-2">
-                        <Card.Body key={job._id} onClick={()=>{setOpen(o => !o); setPopupJobId(job._id)}}>
+                        <Card.Body key={job._id} onClick={()=>{handleShow(); setPopupJobId(job._id)}}>
                             <Card.Title style={{"fontSize":16}}>{job.title}</Card.Title>
                             <Card.Text style={{"fontSize":14}}>{job.company}, {job.jobType}</Card.Text>
                         </Card.Body>          
                     </Card>
                 ))
             }
-            <Popup 
-                open={open}
-                closeOnDocumentClick
-                onClose={closeModal}
-            >
-                <JobDetailsPage jobId={popupJobId} />
-            </Popup>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Job</Modal.Title>
+                </Modal.Header>
+                <Modal.Body scrollable>
+                    <JobDetailsPage jobId={popupJobId} />
+                </Modal.Body>
+            </Modal>
 
         </>
     )

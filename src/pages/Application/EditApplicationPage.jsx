@@ -33,7 +33,7 @@ function EditApplicationPage(){
         axios
         .put(`${baseURL}/api/applications/${applicationId}/edit`, reqBody)
         .then(response => {
-            navigate(`/applications/${applicationId}`);
+            navigate("/dashboard");
 
             setApplicationStatus("");
             setDateApplied("");

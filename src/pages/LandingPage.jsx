@@ -33,7 +33,7 @@ function LandingPage(){
         <div className="LandingPage shadow-lg">
             
             <div className="d-flex flex-row-reverse justify-content-between">
-                <img className="border border-top-0 border-dark p-3 me-2" src={githubLogo} style={{ width: 60, height: 60}} alt="github logo" /> 
+                <a href="https://github.com/parrr-geng" target="blank"><img className="border border-top-0 border-dark p-3 me-2" src={githubLogo} style={{ width: 60, height: 60}} alt="github logo" /></a>
                 <Link to="/" className="Logo"><h3 className="ms-4 p-3 fw-bold">J..</h3></Link>
             </div>
 
