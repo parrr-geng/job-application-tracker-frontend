@@ -28,6 +28,7 @@ function EditJobPage(){
     const [recruiter, setRecruiter] = useState(oneJob.recruiter);
     const [description, setDescription] = useState(oneJob.description);
     const [jobUrl, setJobUrl] = useState(oneJob.jobUrl);
+    const [publicVisibility, setPublicVisibility] = useState(oneJob.publicVisibility);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -113,6 +114,10 @@ function EditJobPage(){
                                 <Form.Control type="url" name="description" placeholder={oneJob.jobUrl} onChange={e=>setJobUrl(e.target.value)}/>
                             </FormGroup>
                         </Col>
+
+                        <Form.Group className="mb-5" controlId="JobFormPublic">
+                            <Form.Check name="public" type="checkbox" label="Set the visibility to public" onChange={e => setPublicVisibility(e.target.checked)}/>
+                        </Form.Group>
 
                         <Button variant="dark" type="submit">Save</Button>
                     </Form>

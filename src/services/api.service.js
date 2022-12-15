@@ -17,14 +17,19 @@ class ApiService {
     });
   }
 
-  // POST /api/examples
+  // POST 
   createJob = async (userId, requestBody) => {
-    return this.api.post(`${userId}/job/create`, requestBody);
+    return this.api.post(`/api/${userId}/job/create`, requestBody);
   }
 
-  // GET /api/examples
-  getAll = async () => {
-    return this.api.get('/api/examples');
+  // GET 
+  getOneUser = async (userId) => {
+    return this.api.get(`/api/profile/${userId}`);
+  }
+
+  // GET
+  getAllUsers = async () => {
+    return this.api.get('/api/users');
   }
 
   // GET /api/examples/:id

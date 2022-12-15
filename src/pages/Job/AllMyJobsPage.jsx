@@ -40,6 +40,7 @@ function AllMyJobsPage(){
                     </Card>
                 ))
             }
+            
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Job</Modal.Title>

@@ -7,7 +7,6 @@ import ApplicationDetailsPage from "./ApplicationDetailsPage";
 
 function ApplicationsPage(props){
     const status = props.status;
-    const searchKeyword = props.search;
     const [applications, setApplications] = useState([]);
     const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
     const { user } = useContext(AuthContext);
@@ -18,20 +17,11 @@ function ApplicationsPage(props){
     const handleShow = () => setShow(true);
     const [popupApplicationId, setPopupApplicationId] = useState("");
 
-
     useEffect(()=>{
         axios.get(`${baseURL}/api/${userId}/applications/${status}`)
         .then(response => {
             const foundApplications = response.data;
-            if(searchKeyword === null){setApplications(foundApplications)}
-            else {
-                const filteredApplications = [...foundApplications].filter(application=>{
-                    application.jobTitle.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-                    application.notes.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-                    application.coverLetter.toLowerCase().includes(searchKeyword.toLowerCase())
-                })
-                setApplications(filteredApplications);
-            }
+            setApplications(foundApplications)
         })
         .catch(error => console.log(error))
     }, [status])

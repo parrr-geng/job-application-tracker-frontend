@@ -15,7 +15,7 @@ import SearchField from "../components/SearchField";
 function DashboardPage(){
     const { user } = useContext(AuthContext);
     const userId = user._id;
-    const [search, setSearch] = useState(null);
+    const [query, setQuery] = useState(null);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -36,12 +36,12 @@ function DashboardPage(){
                     <div className="row p-3">
                         <div className="col-2" >
                             <h6 className="Category p-2">Job Posts</h6>
-                            <Card className="text-decoration-none text-dark"
+                            <Card className="text-dark"
                             onClick={handleShow}
                             > + 
                             </Card>
                      
-                            <AllMyJobsPage search={search} />
+                            <AllMyJobsPage />
                         </div>
                         <div className="col">
                             <div className="my-4">
@@ -62,31 +62,31 @@ function DashboardPage(){
                                 <div className="col" id="Wishlist">
                                     <h6 className="Category p-2">Wishlist</h6>
                                     <div className="Applications border border-dark rounded">
-                                        <ApplicationsPage status={"Wishlist"} search={search}/>
+                                        <ApplicationsPage status={"Wishlist"} />
                                     </div>
                                 </div>
                                 <div className="col" id="Applied">
                                     <h6 className="Category p-2">Applied</h6>
                                     <div className="Applications border border-dark rounded">
-                                        <ApplicationsPage status={"Applied"} search={search}/>
+                                        <ApplicationsPage status={"Applied"} />
                                     </div>
                                 </div>
                                 <div className="col" id="InProcess">
                                     <h6 className="Category p-2">In Process</h6>
                                     <div className="Applications border border-dark rounded">
-                                        <ApplicationsPage status={"In Process"} search={search}/>
+                                        <ApplicationsPage status={"In Process"} />
                                     </div>
                                 </div>
                                 <div className="col" id="Rejected">
                                     <h6 className="Category p-2">Rejected</h6>
                                     <div className="Applications border border-dark rounded">
-                                        <ApplicationsPage status={"Rejected"} search={search}/>
+                                        <ApplicationsPage status={"Rejected"} />
                                     </div>
                                 </div>
                                 <div className="col" id="Offer">
                                     <h6 className="Category p-2">Offer!</h6>
                                     <div className="Applications border border-dark rounded">
-                                        <ApplicationsPage status={"Offer"} search={search}/>
+                                        <ApplicationsPage status={"Offer"} />
                                     </div> 
                                 </div>
 

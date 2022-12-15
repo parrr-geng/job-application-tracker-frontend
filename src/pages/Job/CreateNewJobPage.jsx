@@ -12,7 +12,7 @@ function CreateNewJobPage(){
     const [recruiter, setRecruiter] = useState("");
     const [description, setDescription] = useState("");
     const [jobUrl, setJobUrl] = useState("");
-    const [visibility, setVisibility] = useState(false);
+    const [publicVisibility, setPublicVisibility] = useState(false);
 
     const navigate = useNavigate();
     const baseURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
@@ -22,7 +22,7 @@ function CreateNewJobPage(){
     const handleSubmit = e => {
         e.preventDefault();
 
-        const reqBody = {title, company, location, jobType, recruiter, description, jobUrl, visibility};
+        const reqBody = {title, company, location, jobType, recruiter, description, jobUrl, publicVisibility};
 
         axios.post(`${baseURL}/api/${userId}/job/create`, reqBody)
         .then(response => {
@@ -36,7 +36,7 @@ function CreateNewJobPage(){
             setRecruiter("");
             setDescription("");
             setJobUrl("");
-            setVisibility(false);
+            setPublicVisibility(false);
             
         })
         .catch(err=>console.log(err))
@@ -99,11 +99,11 @@ function CreateNewJobPage(){
 
                 <Form.Group className="mb-3" controlId="JobFormLink">
                     <Form.Label>Link</Form.Label>
-                    <Form.Control name="jobUrl" type="url" placeholder="Link to the original job post" onChange={e=>setJobUrl(e.target.value)}/>
+                    <Form.Control name="jobUrl" type="url" placeholder="Link to the original job post" onChange={e => setJobUrl(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group className="mb-5" controlId="JobFormPublic">
-                    <Form.Check name="public" type="checkbox" label="Set the visibility to public" onChange={e => setVisibility(e.target.checked)}/>
+                    <Form.Check name="public" type="checkbox" label="Set the visibility to public" onChange={e => setPublicVisibility(e.target.checked)}/>
                 </Form.Group>
 
                 <Button variant="dark" type="submit">Add this Job</Button>

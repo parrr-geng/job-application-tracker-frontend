@@ -1,18 +1,17 @@
 import "./LandingPage.css";
 import githubLogo from "../assets/githubLogo.png";
+import landingPageIllustration from "../assets/goalAchieved.jpeg";
 import axios from "axios";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
 import { useState, useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Card} from "react-bootstrap";
 import ContactUsPage from "./ContactUsPage";
 import { AuthContext } from "../context/auth.context"; 
-import service from "../services/api.service";
 
 function LandingPage(){
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
 
     const toggleDisplay = (divID) => {
         let x = document.getElementById(divID);
@@ -38,7 +37,7 @@ function LandingPage(){
             </div>
 
             <section className="header row my-5">
-                <div className="col-sm-8 ps-4 ">
+                <div className="col-sm-6 ps-4 ">
                     <h2 className="fs-1 fw-bold">One Tracker</h2>
                     <h2 className="fs-1 fw-bold">All Job Applications</h2>
                     <p>Document and track all your job applications in an easy way.</p>
@@ -53,8 +52,8 @@ function LandingPage(){
                     </Link>
 
                 </div>
-                <div className="col-sm-4">
-                    <img src="" alt=""/>
+                <div className="col-sm-6">
+                    <img src={landingPageIllustration} style={{width: "90%", height:"90%"}}alt="multitasking illustration by EleniDebo"/>
                 </div>
             </section>
 
@@ -98,7 +97,9 @@ function LandingPage(){
             <section id="Pricing">
                 <div className="p-4">
                     <h2 className="mb-4">Pricing</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum veniam similique maiores reiciendis. Nobis eligendi excepturi sit nulla, corrupti delectus consectetur fuga necessitatibus iste doloribus voluptatem, id, minima repellendus voluptates.</p>
+                    <h5 className="mb-4">It's FREE.</h5>
+                    <p>We are currently at our development and testing stage.</p>
+                    <p>Please use our site for free and don't hesitate to share your valuable feedbacks with us!</p>
                 </div>
             </section>
 
@@ -116,6 +117,8 @@ function LandingPage(){
                     <Link className="text-decoration-none text-dark">Contact Us</Link>
                 </div>
             </footer>
+
+
 
             <Popup 
                 open={open}

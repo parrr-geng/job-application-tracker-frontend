@@ -47,7 +47,7 @@ function JobDetailsPage(props){
 
             <div className="mb-5" >
                 <h6 className="text-secondary">Link</h6>
-                <Link style={{"text-decoration":"none"}} to={oneJob.jobUrl}>Original Jobpost</Link>
+                {oneJob.Url !== "" && <a href={oneJob.jobUrl} target="blank">Original Jobpost</a>}
             </div>
             
             <div className="d-flex flex-row mb-2">

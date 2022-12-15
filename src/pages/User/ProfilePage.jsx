@@ -18,7 +18,7 @@ function ProfilePage() {
   return (
     <div>
       <div className="px-4 py-2">
-        <img className="mb-3" src={oneUser.profileImageURL ? oneUser.profileImageURL : "https://www.pngkey.com/png/detail/202-2024792_user-profile-icon-png-download-fa-user-circle.png"} alt="profile image" style={{height:80, width:80, "border-radius":"50%"}} />
+        <img className="mb-3" src={oneUser.profileImageURL ? oneUser.profileImageURL : "https://www.pngkey.com/png/detail/202-2024792_user-profile-icon-png-download-fa-user-circle.png"} alt="profile image" style={{height:100, width:100, "borderRadius":"50%"}} />
         <h3><span>{oneUser.name}</span></h3>
         <p>{oneUser.location}</p>
         <hr />
@@ -28,10 +28,10 @@ function ProfilePage() {
         <h5>Experience</h5>
         <p className="ps-2">{oneUser.experience}</p>
         <hr />
-        <h4>Education</h4>
+        <h5>Education</h5>
         <p className="ps-2">{oneUser.education}</p>
         <hr />
-        <h4>Skills</h4>
+        <h5>Skills</h5>
         <p className="ps-2">{oneUser.skills}</p>
 
         

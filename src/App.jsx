@@ -33,7 +33,7 @@ function App() {
         
         <Route path="/dashboard" element={<IsPrivate> <DashboardPage /> </IsPrivate>} />
         <Route path="/:userId/profile/edit" element={<IsPrivate> <EditProfilePage/> </IsPrivate>} />
-
+        
         <Route path="/jobs" element={<AllJobsPage />} />
         <Route path="/:userId/jobs" element={<IsPrivate> <AllMyJobsPage /> </IsPrivate>} />
         <Route path="/:userId/job/create" element={<IsPrivate> <CreateNewJobPage /> </IsPrivate>} />
