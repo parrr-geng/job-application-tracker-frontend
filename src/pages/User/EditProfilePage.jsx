@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Form, FloatingLabel, Button, FormGroup } from "react-bootstrap";
+import { Row, Col, Form, Button, FormGroup } from "react-bootstrap";
 import Sidebar from "../../components/Sidebar";
 import { AuthContext } from "../../context/auth.context"; 
 import service from "../../services/api.service";
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 function EditProfilePage () {
     const [oneUser, setOneUser] = useState({});
@@ -365,8 +367,11 @@ function EditProfilePage () {
 
                         <FormGroup className="mb-3" controlId="floatingTextarea1">
                             <Form.Label>About</Form.Label>
-                            <Form.Control as="textarea" name="about" placeholder={oneUser.about} onChange={e=>setAbout(e.target.value)} style={{ height: '100px' }} />
+                            <ReactQuill theme="snow" value={about} onChange={setAbout} />
+                            {/* <Form.Control as="textarea" name="about" placeholder={oneUser.about} onChange={e=>setAbout(e.target.value)} style={{ height: '100px' }} /> */}
                         </FormGroup>
+                        
+                        
 
                         <FormGroup className="mb-3" controlId="floatingTextarea2">
                             <Form.Label>Experience</Form.Label>

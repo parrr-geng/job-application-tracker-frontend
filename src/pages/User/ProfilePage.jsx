@@ -31,6 +31,9 @@ function ProfilePage() {
         <h5>Education</h5>
         <p className="ps-2">{oneUser.education}</p>
         <hr />
+        <h5>Languages</h5>
+        <p className="ps-2">{oneUser.languages}</p>
+        <hr />
         <h5>Skills</h5>
         <p className="ps-2">{oneUser.skills}</p>
 
