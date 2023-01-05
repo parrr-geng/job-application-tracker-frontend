@@ -33,7 +33,7 @@ function LandingPage(){
             
             <div className="d-flex flex-row-reverse justify-content-between">
                 <a href="https://github.com/parrr-geng" target="blank"><img className="border border-top-0 border-dark p-3 me-2" src={githubLogo} style={{ width: 60, height: 60}} alt="github logo" /></a>
-                <Link to="/" className="Logo"><h3 className="ms-4 p-3 fw-bold">J..</h3></Link>
+                <Link to="/" className="Logo"><h3 className="ms-4 p-3 fw-bold">JT</h3></Link>
             </div>
 
             <section className="header row my-5">
@@ -54,6 +54,7 @@ function LandingPage(){
                 </div>
                 <div className="col-sm-6">
                     <img src={landingPageIllustration} style={{width: "90%", height:"90%"}}alt="multitasking illustration by EleniDebo"/>
+                    <p className="pe-5" style={{"text-align":"right", "color":"grey"}}>(Illustration by soonsoonlee)</p>
                 </div>
             </section>
 
@@ -76,6 +77,7 @@ function LandingPage(){
                 <div className="p-4">
                     <h2 className="mb-4">How It Works</h2>
                     <div className="row">
+                        {/*
                         <iframe className="col-6" width="672" height="378" 
                             src="https://www.youtube.com/embed/oTahLEX3NXo" 
                             title="YouTube video player" 
@@ -85,6 +87,8 @@ function LandingPage(){
                         >
                         </iframe>
                         <div className="col-1"></div>
+                        */}
+
                         <div className="col-5">
                             <h4>Create, edit and tailor your own application</h4>
                             <h4>Share and track with all other job hunters</h4>
@@ -98,8 +102,9 @@ function LandingPage(){
                 <div className="p-4">
                     <h2 className="mb-4">Pricing</h2>
                     <h5 className="mb-4">It's FREE.</h5>
-                    <p>We are currently at our development and testing stage.</p>
-                    <p>Please use our site for free and don't hesitate to share your valuable feedbacks with us!</p>
+                    <p>And it will ALWAYS be.</p>
+                    <p>This site is currently at the development and testing stage.</p>
+                    <p>Please use it for free and don't hesitate to share your valuable feedbacks with me!</p>
                 </div>
             </section>
 
